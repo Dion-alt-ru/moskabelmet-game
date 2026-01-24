@@ -1,28 +1,53 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Умный город - Москабельмет</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
             color: #ffffff;
             overflow: hidden;
             width: 100vw;
             height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            position: relative;
+        }
+
+        /* Анимированный фон */
+        body::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 20% 50%, rgba(255, 140, 66, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(33, 150, 243, 0.1) 0%, transparent 50%);
+            animation: moveBackground 20s ease infinite;
+        }
+
+        @keyframes moveBackground {
+
+            0%,
+            100% {
+                transform: translate(0, 0);
+            }
+
+            50% {
+                transform: translate(-50px, -50px);
+            }
         }
 
         #app {
@@ -30,9 +55,11 @@
             height: 100%;
             display: flex;
             flex-direction: column;
+            position: relative;
+            z-index: 1;
         }
 
-        /* Меню */
+        /* ========== МЕНЮ ========== */
         .menu {
             width: 100%;
             height: 100%;
@@ -41,149 +68,306 @@
             justify-content: center;
             align-items: center;
             padding: 20px;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            position: relative;
+        }
+
+        .menu::before {
+            content: '🏙️';
+            position: absolute;
+            font-size: 200px;
+            opacity: 0.05;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translate(-50%, -50%) translateY(0);
+            }
+
+            50% {
+                transform: translate(-50%, -50%) translateY(-20px);
+            }
+        }
+
+        .logo {
+            font-size: 48px;
+            margin-bottom: 10px;
+            animation: bounce 2s ease infinite;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
         }
 
         .menu h1 {
-            font-size: 32px;
-            margin-bottom: 10px;
-            color: #ff8c42;
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, #ff8c42 0%, #ff6b35 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             text-align: center;
+            letter-spacing: -1px;
         }
 
         .menu h2 {
-            font-size: 20px;
-            margin-bottom: 30px;
+            font-size: 18px;
+            margin-bottom: 40px;
             color: #a8dadc;
             text-align: center;
+            font-weight: 600;
         }
 
         .menu-content {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 30px;
-            max-width: 400px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 32px 24px;
+            max-width: 420px;
             width: 90%;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
         }
 
-        .menu p {
-            font-size: 16px;
+        .menu-section {
+            margin-bottom: 24px;
+        }
+
+        .menu-section h3 {
+            font-size: 15px;
+            font-weight: 700;
+            color: #ff8c42;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .menu-section p {
+            font-size: 14px;
             line-height: 1.6;
-            margin-bottom: 20px;
-            color: #e0e0e0;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 8px;
+        }
+
+        .instruction-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            margin-bottom: 8px;
+            transition: all 0.3s;
+        }
+
+        .instruction-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(5px);
+        }
+
+        .instruction-number {
+            background: linear-gradient(135deg, #ff8c42 0%, #ff6b35 100%);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .instruction-text {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.5;
         }
 
         .btn {
             width: 100%;
-            padding: 16px;
-            font-size: 18px;
-            font-weight: bold;
+            padding: 18px;
+            font-size: 17px;
+            font-weight: 700;
             border: none;
-            border-radius: 12px;
+            border-radius: 16px;
             cursor: pointer;
             transition: all 0.3s;
-            margin-bottom: 10px;
+            font-family: 'Inter', sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn:active::before {
+            width: 300px;
+            height: 300px;
         }
 
         .btn-primary {
             background: linear-gradient(135deg, #ff8c42 0%, #ff6b35 100%);
             color: white;
+            box-shadow: 0 10px 30px rgba(255, 140, 66, 0.4);
         }
 
         .btn-primary:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 20px rgba(255, 140, 66, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(255, 140, 66, 0.5);
         }
 
-        .btn-secondary {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
+        .btn-primary:active {
+            transform: translateY(0);
         }
 
-        /* Игровой экран */
+        .fact {
+            background: linear-gradient(135deg, rgba(168, 218, 220, 0.15) 0%, rgba(33, 150, 243, 0.15) 100%);
+            border-left: 4px solid #2196F3;
+            padding: 16px;
+            margin-top: 24px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.6;
+        }
+
+        /* ========== ИГРА ========== */
         .game {
             width: 100%;
             height: 100%;
             display: none;
             flex-direction: column;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
         }
 
         .game.active {
             display: flex;
         }
 
-        /* Хедер игры */
         .game-header {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 12px 20px;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 16px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .stat {
             display: flex;
             flex-direction: column;
             align-items: center;
+            gap: 4px;
         }
 
         .stat-label {
             font-size: 11px;
-            color: #a8dadc;
-            margin-bottom: 2px;
+            color: rgba(255, 255, 255, 0.6);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .stat-value {
-            font-size: 18px;
-            font-weight: bold;
-            color: #ff8c42;
+            font-size: 22px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ff8c42 0%, #ff6b35 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        /* Игровое поле */
         .game-canvas {
             flex: 1;
             position: relative;
             overflow: hidden;
-            background: #0f3460;
+            background: linear-gradient(135deg, #0f3460 0%, #16213e 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
         }
 
         canvas {
             display: block;
-            width: 100%;
-            height: 100%;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
         }
 
-        /* Панель управления */
         .controls {
-            background: rgba(0, 0, 0, 0.4);
-            padding: 15px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 16px;
             display: flex;
-            gap: 10px;
-            backdrop-filter: blur(10px);
+            gap: 12px;
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .control-btn {
             flex: 1;
-            padding: 12px;
-            font-size: 14px;
-            font-weight: bold;
-            border: 2px solid;
-            border-radius: 10px;
+            padding: 14px 10px;
+            font-size: 13px;
+            font-weight: 700;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 14px;
             cursor: pointer;
             transition: all 0.3s;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.08);
             color: white;
+            font-family: 'Inter', sans-serif;
+            backdrop-filter: blur(10px);
+        }
+
+        .control-btn:active {
+            transform: scale(0.95);
         }
 
         .control-btn.active {
-            background: rgba(255, 140, 66, 0.3);
+            background: linear-gradient(135deg, rgba(255, 140, 66, 0.3) 0%, rgba(255, 107, 53, 0.3) 100%);
             border-color: #ff8c42;
-            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255, 140, 66, 0.3);
         }
 
-        /* Результаты */
+        .control-btn.check {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            border-color: #4CAF50;
+            box-shadow: 0 5px 20px rgba(76, 175, 80, 0.3);
+        }
+
+        .control-btn.check:hover {
+            box-shadow: 0 8px 25px rgba(76, 175, 80, 0.4);
+        }
+
+        /* ========== РЕЗУЛЬТАТЫ ========== */
         .results {
             display: none;
             position: absolute;
@@ -191,10 +375,22 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(0, 0, 0, 0.95);
             justify-content: center;
             align-items: center;
             z-index: 1000;
+            backdrop-filter: blur(10px);
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
         }
 
         .results.active {
@@ -203,79 +399,119 @@
 
         .results-content {
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            border-radius: 20px;
-            padding: 40px 30px;
+            border-radius: 24px;
+            padding: 40px 28px;
             max-width: 400px;
             width: 90%;
             text-align: center;
-            border: 3px solid #ff8c42;
+            border: 2px solid rgba(255, 140, 66, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+            animation: slideUp 0.4s;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
 
         .results h2 {
-            font-size: 28px;
-            margin-bottom: 20px;
-            color: #ff8c42;
+            font-size: 32px;
+            margin-bottom: 24px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ff8c42 0%, #ff6b35 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .results-stats {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 20px;
-            margin: 20px 0;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 24px;
+            margin: 24px 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .result-row {
             display: flex;
             justify-content: space-between;
-            margin: 10px 0;
+            margin: 14px 0;
             font-size: 16px;
         }
 
         .result-label {
-            color: #a8dadc;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 600;
         }
 
         .result-value {
-            color: #ff8c42;
-            font-weight: bold;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ff8c42 0%, #ff6b35 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        /* Инструкция */
-        .instructions {
-            font-size: 13px;
-            color: #a8dadc;
-            margin-top: 15px;
-            line-height: 1.4;
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            margin-top: 12px;
         }
 
-        .fact {
-            background: rgba(168, 218, 220, 0.1);
-            border-left: 3px solid #a8dadc;
-            padding: 12px;
-            margin-top: 20px;
-            font-size: 13px;
-            font-style: italic;
-            color: #e0e0e0;
-            text-align: left;
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
         }
     </style>
 </head>
+
 <body>
     <div id="app">
         <!-- Меню -->
         <div class="menu" id="menu">
-            <h1>🏙️ Умный город</h1>
+            <div class="logo">🏙️</div>
+            <h1>Умный город</h1>
             <h2>от Москабельмет</h2>
             <div class="menu-content">
-                <p><strong>Цель игры:</strong> Подключи все здания к электростанции, прокладывая кабели. Используй минимум кабеля для максимального результата!</p>
-                <p><strong>Как играть:</strong></p>
-                <p>1️⃣ Выбери режим кабеля внизу<br>
-                2️⃣ Тапай по клеткам для прокладки<br>
-                3️⃣ Подключи все дома к станции<br>
-                4️⃣ Нажми "Проверить" когда готово</p>
+                <div class="menu-section">
+                    <h3>🎯 Цель игры</h3>
+                    <p>Подключи все здания к электростанции, прокладывая кабели. Используй минимум кабеля для
+                        максимального результата!</p>
+                </div>
+
+                <div class="menu-section">
+                    <h3>📖 Как играть</h3>
+                    <div class="instruction-item">
+                        <div class="instruction-number">1</div>
+                        <div class="instruction-text">Выбери режим "Кабель" или "Стереть"</div>
+                    </div>
+                    <div class="instruction-item">
+                        <div class="instruction-number">2</div>
+                        <div class="instruction-text">Тапай по клеткам для прокладки кабеля</div>
+                    </div>
+                    <div class="instruction-item">
+                        <div class="instruction-number">3</div>
+                        <div class="instruction-text">Подключи все дома к станции ⚡</div>
+                    </div>
+                    <div class="instruction-item">
+                        <div class="instruction-number">4</div>
+                        <div class="instruction-text">Нажми "Проверить" для завершения</div>
+                    </div>
+                </div>
+
                 <button class="btn btn-primary" onclick="startGame()">🚀 Начать игру</button>
+
                 <div class="fact">
-                    💡 <strong>Факт:</strong> Москабельмет с 1895 года создаёт кабельную инфраструктуру для "умных городов", которая управляет освещением, трафиком и безопасностью!
+                    💡 <strong>Факт:</strong> Москабельмет с 1895 года создаёт кабельную инфраструктуру для "умных
+                    городов", которая управляет освещением, трафиком и безопасностью!
                 </div>
             </div>
         </div>
@@ -304,7 +540,7 @@
             <div class="controls">
                 <button class="control-btn active" id="cableBtn" onclick="selectMode('cable')">📡 Кабель</button>
                 <button class="control-btn" id="eraseBtn" onclick="selectMode('erase')">🗑️ Стереть</button>
-                <button class="control-btn" onclick="checkSolution()" style="background: rgba(76, 175, 80, 0.3); border-color: #4CAF50;">✓ Проверить</button>
+                <button class="control-btn check" onclick="checkSolution()">✓ Проверить</button>
             </div>
         </div>
 
@@ -334,7 +570,6 @@
     </div>
 
     <script>
-        // Инициализация Telegram WebApp
         let tg = null;
         let isInTelegram = false;
 
@@ -343,16 +578,13 @@
             tg.ready();
             tg.expand();
             isInTelegram = true;
-            console.log('Telegram WebApp инициализирован');
         } catch (e) {
-            console.log('Запуск вне Telegram');
             isInTelegram = false;
         }
 
-        // Игровые переменные
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
-        
+
         let gridSize = 8;
         let cellSize = 0;
         let currentMode = 'cable';
@@ -361,35 +593,34 @@
         let usedCables = 0;
         let maxLevel = 5;
 
-        // Уровни
         const levels = [
-            { 
-                buildings: [{x: 2, y: 2}, {x: 5, y: 2}, {x: 2, y: 5}], 
-                station: {x: 0, y: 0},
+            {
+                buildings: [{ x: 2, y: 2 }, { x: 5, y: 2 }, { x: 2, y: 5 }],
+                station: { x: 0, y: 0 },
                 optimal: 9,
                 fact: "Оптоволоконный кабель передаёт данные со скоростью света!"
             },
-            { 
-                buildings: [{x: 3, y: 1}, {x: 6, y: 3}, {x: 2, y: 5}, {x: 5, y: 6}], 
-                station: {x: 0, y: 0},
+            {
+                buildings: [{ x: 3, y: 1 }, { x: 6, y: 3 }, { x: 2, y: 5 }, { x: 5, y: 6 }],
+                station: { x: 0, y: 0 },
                 optimal: 15,
                 fact: "Москабельмет поставлял кабели для стадионов ЧМ-2018!"
             },
-            { 
-                buildings: [{x: 2, y: 2}, {x: 5, y: 1}, {x: 6, y: 4}, {x: 3, y: 6}, {x: 1, y: 5}], 
-                station: {x: 0, y: 0},
+            {
+                buildings: [{ x: 2, y: 2 }, { x: 5, y: 1 }, { x: 6, y: 4 }, { x: 3, y: 6 }, { x: 1, y: 5 }],
+                station: { x: 0, y: 0 },
                 optimal: 18,
                 fact: "СКС объединяет все устройства в здании в единую сеть!"
             },
-            { 
-                buildings: [{x: 1, y: 3}, {x: 4, y: 1}, {x: 6, y: 2}, {x: 5, y: 5}, {x: 2, y: 6}, {x: 6, y: 6}], 
-                station: {x: 0, y: 0},
+            {
+                buildings: [{ x: 1, y: 3 }, { x: 4, y: 1 }, { x: 6, y: 2 }, { x: 5, y: 5 }, { x: 2, y: 6 }, { x: 6, y: 6 }],
+                station: { x: 0, y: 0 },
                 optimal: 23,
                 fact: "ЦОД - это 'цифровое сердце' современного города!"
             },
-            { 
-                buildings: [{x: 2, y: 1}, {x: 5, y: 1}, {x: 1, y: 3}, {x: 6, y: 3}, {x: 3, y: 5}, {x: 5, y: 6}, {x: 1, y: 7}], 
-                station: {x: 0, y: 0},
+            {
+                buildings: [{ x: 2, y: 1 }, { x: 5, y: 1 }, { x: 1, y: 3 }, { x: 6, y: 3 }, { x: 3, y: 5 }, { x: 5, y: 6 }, { x: 1, y: 7 }],
+                station: { x: 0, y: 0 },
                 optimal: 28,
                 fact: "Умный город экономит до 30% электроэнергии благодаря кабельной инфраструктуре!"
             }
@@ -397,9 +628,7 @@
 
         let currentLevelData = levels[0];
         let grid = [];
-        let cables = [];
 
-        // Вибрация
         function vibrate(type = 'light') {
             if (isInTelegram && tg.HapticFeedback) {
                 if (type === 'success') {
@@ -414,7 +643,7 @@
 
         function initCanvas() {
             const container = document.querySelector('.game-canvas');
-            const size = Math.min(container.clientWidth, container.clientHeight);
+            const size = Math.min(container.clientWidth - 20, container.clientHeight - 20, 500);
             canvas.width = size;
             canvas.height = size;
             cellSize = size / gridSize;
@@ -422,7 +651,6 @@
 
         function initGrid() {
             grid = [];
-            cables = [];
             for (let i = 0; i < gridSize; i++) {
                 grid[i] = [];
                 for (let j = 0; j < gridSize; j++) {
@@ -430,11 +658,9 @@
                 }
             }
 
-            // Установка станции
             const station = currentLevelData.station;
             grid[station.y][station.x] = { type: 'station', connected: true };
 
-            // Установка зданий
             currentLevelData.buildings.forEach(b => {
                 grid[b.y][b.x] = { type: 'building', connected: false };
             });
@@ -446,51 +672,104 @@
         function draw() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            // Рисуем сетку
             for (let i = 0; i < gridSize; i++) {
                 for (let j = 0; j < gridSize; j++) {
                     const x = j * cellSize;
                     const y = i * cellSize;
-
-                    // Фон клетки
-                    ctx.fillStyle = 'rgba(255, 255, 255, 0.05)';
-                    ctx.fillRect(x, y, cellSize, cellSize);
-
-                    // Границы
-                    ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
-                    ctx.lineWidth = 1;
-                    ctx.strokeRect(x, y, cellSize, cellSize);
-
                     const cell = grid[i][j];
 
-                    // Рисуем кабель
+                    // Фон клетки с градиентом
+                    const gradient = ctx.createLinearGradient(x, y, x + cellSize, y + cellSize);
+                    gradient.addColorStop(0, 'rgba(15, 52, 96, 0.3)');
+                    gradient.addColorStop(1, 'rgba(22, 33, 62, 0.3)');
+                    ctx.fillStyle = gradient;
+                    ctx.fillRect(x, y, cellSize, cellSize);
+
+                    // Границы с свечением
+                    ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
+                    ctx.lineWidth = 1;
+                    ctx.strokeRect(x + 0.5, y + 0.5, cellSize - 1, cellSize - 1);
+
+                    // Кабель с улучшенной графикой
                     if (cell.type === 'cable') {
-                        ctx.fillStyle = cell.connected ? '#4CAF50' : '#FF9800';
-                        ctx.fillRect(x + cellSize * 0.4, y + cellSize * 0.4, cellSize * 0.2, cellSize * 0.2);
+                        const cableGradient = ctx.createRadialGradient(
+                            x + cellSize / 2, y + cellSize / 2, 0,
+                            x + cellSize / 2, y + cellSize / 2, cellSize / 3
+                        );
+                        if (cell.connected) {
+                            cableGradient.addColorStop(0, '#4CAF50');
+                            cableGradient.addColorStop(1, '#45a049');
+                            // Свечение для подключенного кабеля
+                            ctx.shadowBlur = 10;
+                            ctx.shadowColor = '#4CAF50';
+                        } else {
+                            cableGradient.addColorStop(0, '#FF9800');
+                            cableGradient.addColorStop(1, '#F57C00');
+                        }
+                        ctx.fillStyle = cableGradient;
+                        ctx.beginPath();
+                        ctx.arc(x + cellSize / 2, y + cellSize / 2, cellSize * 0.15, 0, Math.PI * 2);
+                        ctx.fill();
+                        ctx.shadowBlur = 0;
                     }
 
-                    // Рисуем станцию
+                    // Станция с эффектом свечения
                     if (cell.type === 'station') {
-                        ctx.fillStyle = '#ff8c42';
+                        const stationGradient = ctx.createRadialGradient(
+                            x + cellSize / 2, y + cellSize / 2, 0,
+                            x + cellSize / 2, y + cellSize / 2, cellSize * 0.45
+                        );
+                        stationGradient.addColorStop(0, '#ff8c42');
+                        stationGradient.addColorStop(1, '#ff6b35');
+
+                        ctx.shadowBlur = 20;
+                        ctx.shadowColor = '#ff8c42';
+                        ctx.fillStyle = stationGradient;
                         ctx.beginPath();
-                        ctx.arc(x + cellSize / 2, y + cellSize / 2, cellSize * 0.35, 0, Math.PI * 2);
+                        ctx.arc(x + cellSize / 2, y + cellSize / 2, cellSize * 0.4, 0, Math.PI * 2);
                         ctx.fill();
+                        ctx.shadowBlur = 0;
+
+                        // Иконка молнии
                         ctx.fillStyle = 'white';
-                        ctx.font = `${cellSize * 0.4}px Arial`;
+                        ctx.font = `bold ${cellSize * 0.5}px Arial`;
                         ctx.textAlign = 'center';
                         ctx.textBaseline = 'middle';
                         ctx.fillText('⚡', x + cellSize / 2, y + cellSize / 2);
                     }
 
-                    // Рисуем здание
+                    // Здание с улучшенной графикой
                     if (cell.type === 'building') {
-                        ctx.fillStyle = cell.connected ? '#4CAF50' : '#2196F3';
-                        ctx.fillRect(x + cellSize * 0.2, y + cellSize * 0.2, cellSize * 0.6, cellSize * 0.6);
-                        ctx.fillStyle = 'white';
-                        ctx.font = `${cellSize * 0.4}px Arial`;
-                        ctx.textAlign = 'center';
-                        ctx.textBaseline = 'middle';
-                        ctx.fillText('🏠', x + cellSize / 2, y + cellSize / 2);
+                        const buildingGradient = ctx.createLinearGradient(
+                            x + cellSize * 0.2, y + cellSize * 0.2,
+                            x + cellSize * 0.8, y + cellSize * 0.8
+                        );
+                        if (cell.connected) {
+                            buildingGradient.addColorStop(0, '#4CAF50');
+                            buildingGradient.addColorStop(1, '#45a049');
+                            ctx.shadowBlur = 15;
+                            ctx.shadowColor = '#4CAF50';
+                        } else {
+                            buildingGradient.addColorStop(0, '#2196F3');
+                            buildingGradient.addColorStop(1, '#1976D2');
+                        }
+
+                        ctx.fillStyle = buildingGradient;
+                        ctx.fillRect(
+                            x + cellSize * 0.15,
+                            y + cellSize * 0.15,
+                            cellSize * 0.7,
+                            cellSize * 0.7
+                        );
+                        ctx.shadowBlur = 0;
+
+                        // Окна
+                        ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
+                        const windowSize = cellSize * 0.12;
+                        ctx.fillRect(x + cellSize * 0.25, y + cellSize * 0.3, windowSize, windowSize);
+                        ctx.fillRect(x + cellSize * 0.25, y + cellSize * 0.55, windowSize, windowSize);
+                        ctx.fillRect(x + cellSize * 0.63, y + cellSize * 0.3, windowSize, windowSize);
+                        ctx.fillRect(x + cellSize * 0.63, y + cellSize * 0.55, windowSize, windowSize);
                     }
                 }
             }
@@ -500,8 +779,8 @@
             const rect = canvas.getBoundingClientRect();
             const x = clientX - rect.left;
             const y = clientY - rect.top;
-            const col = Math.floor(x / cellSize);
-            const row = Math.floor(y / cellSize);
+            const col = Math.floor((x / rect.width) * gridSize);
+            const row = Math.floor((y / rect.height) * gridSize);
             return { row, col };
         }
 
@@ -552,14 +831,13 @@
         function checkConnection(startRow, startCol, visited) {
             if (startRow < 0 || startRow >= gridSize || startCol < 0 || startCol >= gridSize) return;
             if (visited[startRow][startCol]) return;
-            
+
             const cell = grid[startRow][startCol];
             if (cell.type === 'empty') return;
 
             visited[startRow][startCol] = true;
             cell.connected = true;
 
-            // Проверяем соседей
             checkConnection(startRow - 1, startCol, visited);
             checkConnection(startRow + 1, startCol, visited);
             checkConnection(startRow, startCol - 1, visited);
@@ -567,7 +845,6 @@
         }
 
         function checkSolution() {
-            // Сброс подключений
             for (let i = 0; i < gridSize; i++) {
                 for (let j = 0; j < gridSize; j++) {
                     if (grid[i][j].type !== 'station') {
@@ -576,14 +853,12 @@
                 }
             }
 
-            // BFS от станции
             const visited = Array(gridSize).fill(null).map(() => Array(gridSize).fill(false));
             const station = currentLevelData.station;
             checkConnection(station.y, station.x, visited);
 
             draw();
 
-            // Проверяем все здания
             let allConnected = true;
             for (const building of currentLevelData.buildings) {
                 if (!grid[building.y][building.x].connected) {
@@ -615,7 +890,7 @@
 
         function nextLevel() {
             document.getElementById('results').classList.remove('active');
-            
+
             if (currentLevel < maxLevel) {
                 currentLevel++;
                 currentLevelData = levels[currentLevel - 1];
@@ -635,12 +910,11 @@
                     game: 'smart_city'
                 }));
             }
-            
+
             document.getElementById('results').classList.remove('active');
             document.getElementById('game').classList.remove('active');
             document.getElementById('menu').style.display = 'flex';
-            
-            // Сброс игры
+
             currentLevel = 1;
             totalScore = 0;
             currentLevelData = levels[0];
@@ -649,20 +923,17 @@
         function startGame() {
             document.getElementById('menu').style.display = 'none';
             document.getElementById('game').classList.add('active');
-            
+
             initCanvas();
             initGrid();
             draw();
             updateStats();
-            
+
             vibrate('light');
         }
 
-        // Адаптация при изменении размера окна
         window.addEventListener('resize', () => {
             initCanvas();
             draw();
         });
     </script>
-</body>
-</html>
