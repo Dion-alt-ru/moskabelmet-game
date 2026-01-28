@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Эко-квест - Москабельмет</title>
+    <title>Викторина - Москабельмет</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
@@ -18,7 +19,7 @@
 
     body {
         font-family: 'Inter', -apple-system, sans-serif;
-        background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         color: #ffffff;
         overflow-x: hidden;
         min-height: 100vh;
@@ -30,8 +31,8 @@
         width: 200%;
         height: 200%;
         background:
-            radial-gradient(circle at 20% 50%, rgba(76, 175, 80, 0.1) 0%, transparent 50%),
-            radial-gradient(circle at 80% 80%, rgba(33, 150, 243, 0.1) 0%, transparent 50%);
+            radial-gradient(circle at 20% 50%, rgba(255, 140, 66, 0.15) 0%, transparent 50%),
+            radial-gradient(circle at 80% 80%, rgba(33, 150, 243, 0.15) 0%, transparent 50%);
         animation: moveBackground 20s ease infinite;
         z-index: 0;
     }
@@ -98,51 +99,101 @@
     }
 
     h1 {
-        font-size: 36px;
+        font-size: 42px;
         font-weight: 800;
         margin: 15px 0 8px;
-        background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+        background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
         text-align: center;
         letter-spacing: -1px;
+        text-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
     }
 
     .subtitle {
-        font-size: 16px;
-        color: rgba(255, 255, 255, 0.7);
+        font-size: 18px;
+        color: rgba(255, 255, 255, 0.9);
         text-align: center;
         margin-bottom: 30px;
+        font-weight: 600;
     }
 
     /* ========== КАРТОЧКИ ========== */
     .card {
-        background: rgba(255, 255, 255, 0.08);
+        background: rgba(255, 255, 255, 0.1);
         border-radius: 20px;
         padding: 25px;
         backdrop-filter: blur(20px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
         margin-bottom: 15px;
     }
 
     .card h3 {
         font-size: 18px;
-        color: #4CAF50;
+        color: #ffffff;
         margin-bottom: 12px;
         display: flex;
         align-items: center;
         gap: 8px;
+        font-weight: 700;
     }
 
     .card p {
         font-size: 14px;
         line-height: 1.6;
-        color: rgba(255, 255, 255, 0.85);
+        color: rgba(255, 255, 255, 0.9);
     }
 
-    /* ========== СТАТИСТИКА ========== */
+    /* ========== СТАТИСТИКА ПРЕВЬЮ ========== */
+    .stats-preview {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+        margin-bottom: 20px;
+    }
+
+    .stat-item {
+        background: rgba(255, 255, 255, 0.15);
+        border-radius: 16px;
+        padding: 20px 12px;
+        text-align: center;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .stat-number {
+        font-size: 32px;
+        font-weight: 800;
+        color: #ffffff;
+        margin-bottom: 5px;
+    }
+
+    .stat-text {
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.8);
+        font-weight: 600;
+    }
+
+    /* ========== ТЕМЫ ========== */
+    .topics {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .topic-badge {
+        background: rgba(255, 255, 255, 0.2);
+        padding: 8px 14px;
+        border-radius: 20px;
+        font-size: 13px;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.95);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    /* ========== СТАТИСТИКА ИГРЫ ========== */
     .stats-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
@@ -151,25 +202,22 @@
     }
 
     .stat-card {
-        background: rgba(76, 175, 80, 0.15);
+        background: rgba(255, 255, 255, 0.15);
         border-radius: 16px;
         padding: 16px 12px;
         text-align: center;
-        border: 1px solid rgba(76, 175, 80, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.2);
     }
 
     .stat-value {
         font-size: 28px;
         font-weight: 800;
-        background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
+        color: #ffffff;
     }
 
     .stat-label {
         font-size: 11px;
-        color: rgba(255, 255, 255, 0.6);
+        color: rgba(255, 255, 255, 0.7);
         text-transform: uppercase;
         margin-top: 4px;
         font-weight: 600;
@@ -209,13 +257,20 @@
     }
 
     .btn-primary {
-        background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
-        color: white;
-        box-shadow: 0 10px 30px rgba(76, 175, 80, 0.4);
+        background: rgba(255, 255, 255, 0.95);
+        color: #667eea;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     }
 
     .btn-primary:active {
         transform: scale(0.98);
+    }
+
+    .btn-secondary {
+        background: rgba(255, 255, 255, 0.15);
+        color: white;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        margin-top: 12px;
     }
 
     /* ========== ИГРА ========== */
@@ -225,7 +280,7 @@
     }
 
     .progress-bar {
-        background: rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.2);
         border-radius: 12px;
         height: 8px;
         margin-bottom: 20px;
@@ -233,30 +288,30 @@
     }
 
     .progress-fill {
-        background: linear-gradient(90deg, #4CAF50 0%, #45a049 100%);
+        background: linear-gradient(90deg, #ffffff 0%, #f0f0f0 100%);
         height: 100%;
         transition: width 0.5s ease;
-        box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
     }
 
-    .quest-card {
-        background: rgba(255, 255, 255, 0.08);
+    .question-card {
+        background: rgba(255, 255, 255, 0.1);
         border-radius: 20px;
         padding: 30px 25px;
         backdrop-filter: blur(20px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
         margin-bottom: 20px;
     }
 
-    .quest-type {
+    .question-number {
         display: inline-block;
         padding: 8px 16px;
-        background: rgba(76, 175, 80, 0.2);
+        background: rgba(255, 255, 255, 0.2);
         border-radius: 20px;
         font-size: 12px;
         font-weight: 700;
-        color: #4CAF50;
+        color: #ffffff;
         margin-bottom: 16px;
         text-transform: uppercase;
         letter-spacing: 0.5px;
@@ -278,15 +333,15 @@
     }
 
     .option {
-        background: rgba(255, 255, 255, 0.05);
-        border: 2px solid rgba(255, 255, 255, 0.15);
+        background: rgba(255, 255, 255, 0.1);
+        border: 2px solid rgba(255, 255, 255, 0.2);
         border-radius: 14px;
         padding: 18px 20px;
         cursor: pointer;
         transition: all 0.3s;
         font-size: 15px;
         font-weight: 600;
-        color: rgba(255, 255, 255, 0.9);
+        color: rgba(255, 255, 255, 0.95);
         text-align: left;
     }
 
@@ -294,14 +349,19 @@
         transform: scale(0.98);
     }
 
+    .option:hover {
+        background: rgba(255, 255, 255, 0.15);
+        border-color: rgba(255, 255, 255, 0.4);
+    }
+
     .option.correct {
-        background: linear-gradient(135deg, rgba(76, 175, 80, 0.3) 0%, rgba(69, 160, 73, 0.3) 100%);
+        background: rgba(76, 175, 80, 0.3);
         border-color: #4CAF50;
-        box-shadow: 0 0 20px rgba(76, 175, 80, 0.3);
+        box-shadow: 0 0 20px rgba(76, 175, 80, 0.4);
     }
 
     .option.wrong {
-        background: rgba(244, 67, 54, 0.2);
+        background: rgba(244, 67, 54, 0.3);
         border-color: #f44336;
     }
 
@@ -310,62 +370,10 @@
         opacity: 0.6;
     }
 
-    /* ========== СОРТИРОВКА ========== */
-    .sorting-container {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
-        margin-top: 20px;
-    }
-
-    .bin {
-        background: rgba(255, 255, 255, 0.05);
-        border: 2px dashed rgba(255, 255, 255, 0.3);
-        border-radius: 16px;
-        padding: 20px 15px;
-        min-height: 150px;
-        text-align: center;
-    }
-
-    .bin-title {
-        font-size: 14px;
-        font-weight: 700;
-        margin-bottom: 12px;
-        color: #4CAF50;
-    }
-
-    .items-container {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-        justify-content: center;
-        margin-bottom: 20px;
-    }
-
-    .item {
-        background: linear-gradient(135deg, rgba(76, 175, 80, 0.2) 0%, rgba(69, 160, 73, 0.2) 100%);
-        border: 2px solid rgba(76, 175, 80, 0.4);
-        border-radius: 12px;
-        padding: 12px 16px;
-        cursor: pointer;
-        font-size: 14px;
-        font-weight: 600;
-        transition: all 0.3s;
-    }
-
-    .item:active {
-        transform: scale(1.05);
-    }
-
-    .item.placed {
-        opacity: 0.5;
-        cursor: not-allowed;
-    }
-
     /* ========== ОБРАТНАЯ СВЯЗЬ ========== */
     .feedback {
-        background: rgba(76, 175, 80, 0.15);
-        border-left: 4px solid #4CAF50;
+        background: rgba(255, 255, 255, 0.15);
+        border-left: 4px solid #ffffff;
         border-radius: 12px;
         padding: 20px;
         margin-top: 20px;
@@ -392,25 +400,25 @@
     .feedback-title {
         font-size: 18px;
         font-weight: 700;
-        color: #4CAF50;
+        color: #ffffff;
         margin-bottom: 10px;
     }
 
     .feedback-text {
         font-size: 14px;
         line-height: 1.6;
-        color: rgba(255, 255, 255, 0.85);
+        color: rgba(255, 255, 255, 0.9);
     }
 
-    .eco-fact {
-        background: linear-gradient(135deg, rgba(33, 150, 243, 0.15) 0%, rgba(25, 118, 210, 0.15) 100%);
+    .fact {
+        background: rgba(33, 150, 243, 0.2);
         border-left: 4px solid #2196F3;
         border-radius: 12px;
         padding: 16px;
         margin-top: 15px;
         font-size: 13px;
         line-height: 1.6;
-        color: rgba(255, 255, 255, 0.85);
+        color: rgba(255, 255, 255, 0.9);
     }
 
     /* ========== РЕЗУЛЬТАТЫ ========== */
@@ -441,18 +449,15 @@
     }
 
     .results-title {
-        font-size: 32px;
+        font-size: 36px;
         font-weight: 800;
         margin-bottom: 15px;
-        background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
+        color: #ffffff;
     }
 
     .achievement {
-        background: rgba(255, 215, 0, 0.1);
-        border: 2px solid rgba(255, 215, 0, 0.3);
+        background: rgba(255, 215, 0, 0.15);
+        border: 2px solid rgba(255, 215, 0, 0.4);
         border-radius: 16px;
         padding: 20px;
         margin: 20px 0;
@@ -464,7 +469,7 @@
     }
 
     .achievement-text {
-        font-size: 16px;
+        font-size: 18px;
         font-weight: 700;
         color: #FFD700;
     }
@@ -476,29 +481,43 @@
         <div class="screen active" id="menuScreen">
             <div class="menu-container">
                 <div class="logo-container">
-                    <div class="logo">♻️</div>
-                    <h1>Эко-квест</h1>
-                    <p class="subtitle">от Москабельмет</p>
+                    <div class="logo">🎓</div>
+                    <h1>Викторина</h1>
+                    <p class="subtitle">Москабельмет</p>
                 </div>
 
                 <div class="card">
-                    <h3>🎯 О квесте</h3>
-                    <p>Пройди увлекательные задания, узнай о переработке металлов и помоги спасти планету! Каждое
-                        правильное решение приближает тебя к званию Эко-героя!</p>
+                    <h3>🎯 О викторине</h3>
+                    <p>Проверь свои знания о современных технологиях, кабельной промышленности и работе Москабельмет.
+                        Узнай интересные факты и заработай баллы!</p>
+                </div>
+
+                <div class="stats-preview">
+                    <div class="stat-item">
+                        <div class="stat-number" id="totalQuestions">15</div>
+                        <div class="stat-text">Вопросов</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">~5</div>
+                        <div class="stat-text">Минут</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">1500</div>
+                        <div class="stat-text">Макс. баллов</div>
+                    </div>
                 </div>
 
                 <div class="card">
-                    <h3>🌱 Что тебя ждёт</h3>
-                    <p><strong>✓ Экологические викторины</strong><br>
-                        Проверь знания о переработке<br><br>
-                        <strong>✓ Сортировка металлов</strong><br>
-                        Научись правильно разделять отходы<br><br>
-                        <strong>✓ Интересные факты</strong><br>
-                        Узнай о работе Москабельмет
-                    </p>
+                    <h3>📚 Темы вопросов</h3>
+                    <div class="topics">
+                        <span class="topic-badge">⚡ Кабели и технологии</span>
+                        <span class="topic-badge">🏢 О компании</span>
+                        <span class="topic-badge">🌍 Проекты</span>
+                        <span class="topic-badge">💡 IT-инфраструктура</span>
+                    </div>
                 </div>
 
-                <button class="btn btn-primary" onclick="startQuest()">🚀 Начать квест</button>
+                <button class="btn btn-primary" onclick="startQuiz()">🚀 Начать викторину</button>
             </div>
         </div>
 
@@ -511,23 +530,23 @@
 
                 <div class="stats-grid">
                     <div class="stat-card">
-                        <div class="stat-value" id="currentQuest">1</div>
-                        <div class="stat-label">Задание</div>
+                        <div class="stat-value" id="currentQuestion">1</div>
+                        <div class="stat-label">Вопрос</div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-value" id="score">0</div>
                         <div class="stat-label">Очки</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-value" id="ecoPoints">0</div>
-                        <div class="stat-label">Эко-баллы</div>
+                        <div class="stat-value" id="streak">0</div>
+                        <div class="stat-label">Серия</div>
                     </div>
                 </div>
 
-                <div id="questContent"></div>
+                <div id="questionContent"></div>
 
-                <button class="btn btn-primary" id="nextBtn" style="display: none;" onclick="nextQuest()">Следующее
-                    задание →</button>
+                <button class="btn btn-primary" id="nextBtn" style="display: none;" onclick="nextQuestion()">Следующий
+                    вопрос →</button>
             </div>
         </div>
 
@@ -544,35 +563,33 @@
                             <div class="stat-label">Очки</div>
                         </div>
                         <div class="stat-card">
-                            <div class="stat-value" id="finalEco">0</div>
-                            <div class="stat-label">Эко-баллы</div>
-                        </div>
-                        <div class="stat-card">
                             <div class="stat-value" id="finalCorrect">0</div>
                             <div class="stat-label">Правильных</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="finalPercent">0%</div>
+                            <div class="stat-label">Точность</div>
                         </div>
                     </div>
                 </div>
 
                 <div class="achievement" id="achievement">
                     <div class="achievement-icon">🌟</div>
-                    <div class="achievement-text" id="achievementText">Эко-новичок</div>
+                    <div class="achievement-text" id="achievementText">Знаток технологий</div>
                 </div>
 
                 <div class="card">
-                    <h3>💡 Ты узнал</h3>
-                    <p id="learnedFacts"></p>
+                    <h3>💡 Интересные факты</h3>
+                    <p id="learnedFacts" style="font-size: 14px; line-height: 1.6;"></p>
                 </div>
 
-                <button class="btn btn-primary" onclick="restartQuest()">🔄 Пройти снова</button>
-                <button class="btn btn-primary" onclick="endQuest()"
-                    style="margin-top: 10px; opacity: 0.8;">Завершить</button>
+                <button class="btn btn-primary" onclick="restartQuiz()">🔄 Пройти снова</button>
+                <button class="btn btn-secondary" onclick="endQuiz()">Завершить</button>
             </div>
         </div>
     </div>
 
-    <script>
-        // Инициализация Telegram WebApp
+    <script>// Инициализация Telegram WebApp
         let tg = null;
         let isInTelegram = false;
 
@@ -588,86 +605,53 @@
         }
 
         // Игровые переменные
-        let currentQuestIndex = 0;
+        let currentQuestionIndex = 0;
         let totalScore = 0;
-        let totalEcoPoints = 0;
         let correctAnswers = 0;
-        let selectedItems = {};
-        let selectedItem = null;
+        let currentStreak = 0;
+        let maxStreak = 0;
 
-        // Квесты
-        const quests = [
+        // Вопросы викторины
+        const questions = [
             {
-                type: 'quiz',
-                question: 'Сколько тонн руды экономит переработка 1 тонны меди?',
-                options: ['5 тонн', '10 тонн', '13 тонн', '20 тонн'],
-                correct: 2,
-                fact: 'Переработка 1 тонны меди экономит 13 тонн руды! Москабельмет активно занимается переработкой цветных металлов, помогая сохранить природные ресурсы.',
-                points: 100,
-                eco: 10
-            },
-            {
-                type: 'sort',
-                question: 'Отсортируй металлы на цветные и чёрные',
-                items: ['Медь', 'Сталь', 'Алюминий', 'Чугун', 'Латунь', 'Железо'],
-                bins: {
-                    'Цветные металлы': ['Медь', 'Алюминий', 'Латунь'],
-                    'Чёрные металлы': ['Сталь', 'Чугун', 'Железо']
-                },
-                fact: 'Цветные металлы (медь, алюминий, латунь) - основное сырьё для производства кабелей. Москабельмет принимает их на переработку!',
-                points: 150,
-                eco: 15
-            },
-            {
-                type: 'quiz',
-                question: 'Сколько процентов энергии экономит переработка алюминия по сравнению с производством из руды?',
-                options: ['50%', '75%', '85%', '95%'],
-                correct: 3,
-                fact: 'Переработка алюминия экономит до 95% энергии! Это делает вторичную переработку крайне выгодной для экологии и экономики.',
-                points: 100,
-                eco: 10
-            },
-            {
-                type: 'quiz',
-                question: 'Какой кабель используется для передачи данных на большие расстояния?',
-                options: ['Медный кабель', 'Оптоволоконный кабель', 'Алюминиевый кабель', 'Стальной кабель'],
-                correct: 1,
-                fact: 'Оптоволоконный кабель передаёт данные со скоростью света! Москабельмет производит современные оптоволоконные кабели для телекоммуникаций.',
-                points: 100,
-                eco: 5
-            },
-            {
-                type: 'sort',
-                question: 'Что из этого можно переработать для повторного использования?',
-                items: ['Старый кабель', 'Медная проволока', 'Батарейки', 'Алюминиевая банка', 'Пищевые отходы', 'Латунный фитинг'],
-                bins: {
-                    'Можно переработать': ['Старый кабель', 'Медная проволока', 'Алюминиевая банка', 'Латунный фитинг'],
-                    'Другая переработка': ['Батарейки', 'Пищевые отходы']
-                },
-                fact: 'Москабельмет специализируется на переработке металлосодержащих материалов. Старые кабели содержат ценные металлы, которые можно использовать повторно!',
-                points: 150,
-                eco: 20
-            },
-            {
-                type: 'quiz',
                 question: 'В каком году была основана компания Москабельмет?',
                 options: ['1895', '1950', '2000', '2010'],
                 correct: 0,
                 fact: 'Москабельмет основан в 1895 году - это более 125 лет истории! За это время компания стала крупнейшим промышленно-технологическим холдингом.',
-                points: 100,
-                eco: 5
+                points: 100
             },
             {
-                type: 'quiz',
-                question: 'Сколько раз можно перерабатывать алюминий без потери качества?',
-                options: ['1 раз', '5 раз', '10 раз', 'Бесконечно'],
-                correct: 3,
-                fact: 'Алюминий можно перерабатывать бесконечно без потери качества! Это делает его одним из самых экологичных материалов для кабельной промышленности.',
-                points: 100,
-                eco: 15
+                question: 'Какой тип кабеля используется для передачи данных на большие расстояния?',
+                options: ['Медный кабель', 'Оптоволоконный кабель', 'Алюминиевый кабель', 'Стальной кабель'],
+                correct: 1,
+                fact: 'Оптоволоконный кабель передаёт данные со скоростью света! Москабельмет производит современные оптоволоконные кабели для телекоммуникаций.',
+                points: 100
             },
             {
-                type: 'quiz',
+                question: 'Что такое СКС (Структурированная кабельная система)?',
+                options: [
+                    'Система кондиционирования',
+                    'Единая кабельная инфраструктура здания',
+                    'Система пожарной безопасности',
+                    'Система уборки'
+                ],
+                correct: 1,
+                fact: 'СКС - это "нервная система" современного здания, которая объединяет компьютеры, телефоны, камеры и другое оборудование. Москабельмет проектирует и внедряет такие системы "под ключ".',
+                points: 100
+            },
+            {
+                question: 'Для каких масштабных проектов Москабельмет поставлял кабельную продукцию?',
+                options: [
+                    'Только для московских офисов',
+                    'Для стадионов ЧМ-2018 и Крымского моста',
+                    'Только для частных клиентов',
+                    'Для зарубежных проектов'
+                ],
+                correct: 1,
+                fact: 'Компания участвовала в таких знаковых проектах, как стадионы чемпионата мира по футболу 2018 года и строительство Крымского моста!',
+                points: 100
+            },
+            {
                 question: 'Что такое ЦОД (Центр обработки данных)?',
                 options: [
                     'Центр по очистке данных',
@@ -677,10 +661,127 @@
                 ],
                 correct: 1,
                 fact: 'ЦОД - это "цифровое сердце" современного города! Москабельмет создаёт кабельную инфраструктуру для таких центров.',
-                points: 100,
-                eco: 10
+                points: 100
+            },
+            {
+                question: 'Какое направление активно развивает Москабельмет помимо производства кабелей?',
+                options: [
+                    'Производство бытовой техники',
+                    'Цифровизация и создание "умных" решений',
+                    'Сельское хозяйство',
+                    'Производство автомобилей'
+                ],
+                correct: 1,
+                fact: 'Холдинг развивает цифровые технологии: создает системы "умного" города, промышленной автоматизации и телеком-решения.',
+                points: 100
+            },
+            {
+                question: 'Сколько процентов энергии экономит переработка алюминия по сравнению с производством из руды?',
+                options: ['50%', '75%', '85%', '95%'],
+                correct: 3,
+                fact: 'Переработка алюминия экономит до 95% энергии! Это делает вторичную переработку крайне выгодной для экологии и экономики.',
+                points: 100
+            },
+            {
+                question: 'Что означает полный производственный цикл у Москабельмет?',
+                options: [
+                    'Только сборка готовых компонентов',
+                    'От переработки сырья до производства готового кабеля',
+                    'Только торговля готовой продукцией',
+                    'Только проектирование'
+                ],
+                correct: 1,
+                fact: 'Компания контролирует весь процесс: от приёма и переработки металлов до выпуска готовой кабельной продукции. Это гарантирует качество и конкурентные цены.',
+                points: 100
+            },
+            {
+                question: 'Какие металлы принимает Москабельмет на переработку?',
+                options: [
+                    'Только медь',
+                    'Медь, алюминий, латунь и другие цветные металлы',
+                    'Только чёрные металлы',
+                    'Не занимается переработкой'
+                ],
+                correct: 1,
+                fact: 'Москабельмет принимает широкий спектр цветных металлов. Переработка вторсырья помогает экологии и экономит ресурсы.',
+                points: 100
+            },
+            {
+                question: 'Для каких отраслей работает Москабельмет?',
+                options: [
+                    'Только для IT-компаний',
+                    'Для телекома, энергетики, строительства, промышленности и госсектора',
+                    'Только для частных лиц',
+                    'Только для образовательных учреждений'
+                ],
+                correct: 1,
+                fact: 'Москабельмет - универсальный поставщик решений для самых разных отраслей: от телекоммуникаций до промышленных предприятий.',
+                points: 100
+            },
+            {
+                question: 'Что такое "умный город", в создании которого участвует компания?',
+                options: [
+                    'Город с красивой архитектурой',
+                    'Городская инфраструктура с датчиками, камерами и системами управления',
+                    'Город с большим количеством университетов',
+                    'Город с развитым транспортом'
+                ],
+                correct: 1,
+                fact: '"Умный город" - это сеть датчиков, камер и систем управления, которые делают жизнь удобнее: контролируют трафик, освещение, безопасность. Москабельмет создаёт кабельную инфраструктуру для таких проектов.',
+                points: 100
+            },
+            {
+                question: 'Какой тип кабеля используется для зарядки электромобилей?',
+                options: [
+                    'Обычный бытовой кабель',
+                    'Специальный силовой кабель повышенной мощности',
+                    'Оптоволоконный кабель',
+                    'Телефонный кабель'
+                ],
+                correct: 1,
+                fact: 'Для зарядных станций нужны специальные силовые кабели, выдерживающие большие токи. Москабельмет производит такую продукцию для развития электротранспорта.',
+                points: 100
+            },
+            {
+                question: 'Почему студентам и школьникам интересен Москабельмет?',
+                options: [
+                    'Компания не работает с молодёжью',
+                    'Предлагает стажировки, экскурсии и возможность узнать о современных технологиях',
+                    'Только как место покупки кабеля',
+                    'Только для развлечения'
+                ],
+                correct: 1,
+                fact: 'Москабельмет активно работает с молодёжью: проводит экскурсии на производство, предлагает стажировки и рассказывает о карьере в high-tech индустрии.',
+                points: 100
+            },
+            {
+                question: 'Какие услуги предоставляет Москабельмет для бизнеса?',
+                options: [
+                    'Только продажу кабеля',
+                    'Комплексное проектирование, монтаж и обслуживание IT-инфраструктуры',
+                    'Только консультации',
+                    'Только ремонт'
+                ],
+                correct: 1,
+                fact: 'Компания предлагает решения "под ключ": от проектирования сетей до их монтажа и технической поддержки. Это экономит время и деньги клиентов.',
+                points: 100
+            },
+            {
+                question: 'Москабельмет - это только завод или нечто большее?',
+                options: [
+                    'Только кабельный завод',
+                    'Производитель IT-оборудования',
+                    'Холдинг с полным циклом: от сырья до готовых IT-решений',
+                    'Торговая компания'
+                ],
+                correct: 2,
+                fact: 'Москабельмет - это промышленно-технологический холдинг, который занимается не только производством кабелей, но и созданием комплексных IT-инфраструктур для бизнеса и государства.',
+                points: 100
             }
         ];
+
+        // Обновляем количество вопросов в меню
+        document.getElementById('totalQuestions').textContent = questions.length;
 
         // ========== ФУНКЦИИ ==========
 
@@ -702,117 +803,83 @@
         }
 
         function updateProgress() {
-            const progress = ((currentQuestIndex) / quests.length) * 100;
+            const progress = ((currentQuestionIndex) / questions.length) * 100;
             document.getElementById('progressBar').style.width = progress + '%';
-            document.getElementById('currentQuest').textContent = currentQuestIndex + 1;
+            document.getElementById('currentQuestion').textContent = currentQuestionIndex + 1;
             document.getElementById('score').textContent = totalScore;
-            document.getElementById('ecoPoints').textContent = totalEcoPoints;
+            document.getElementById('streak').textContent = currentStreak;
         }
 
-        function startQuest() {
-            currentQuestIndex = 0;
+        function startQuiz() {
+            currentQuestionIndex = 0;
             totalScore = 0;
-            totalEcoPoints = 0;
             correctAnswers = 0;
+            currentStreak = 0;
+            maxStreak = 0;
             showScreen('gameScreen');
-            loadQuest();
+            loadQuestion();
             vibrate('light');
         }
 
-        function loadQuest() {
-            const quest = quests[currentQuestIndex];
-            const content = document.getElementById('questContent');
+        function loadQuestion() {
+            const question = questions[currentQuestionIndex];
+            const content = document.getElementById('questionContent');
             document.getElementById('nextBtn').style.display = 'none';
 
             updateProgress();
 
-            if (quest.type === 'quiz') {
-                content.innerHTML = `
-            <div class="quest-card">
-                <span class="quest-type">📝 Викторина</span>
-                <div class="question">${quest.question}</div>
-                <div class="options" id="options"></div>
-                <div class="feedback" id="feedback">
-                    <div class="feedback-title" id="feedbackTitle"></div>
-                    <div class="feedback-text" id="feedbackText"></div>
-                    <div class="eco-fact">💡 <strong>Факт:</strong> ${quest.fact}</div>
-                </div>
+            content.innerHTML = `
+        <div class="question-card">
+            <span class="question-number">Вопрос ${currentQuestionIndex + 1} из ${questions.length}</span>
+            <div class="question">${question.question}</div>
+            <div class="options" id="options"></div>
+            <div class="feedback" id="feedback">
+                <div class="feedback-title" id="feedbackTitle"></div>
+                <div class="feedback-text" id="feedbackText"></div>
+                <div class="fact">💡 <strong>Факт:</strong> ${question.fact}</div>
             </div>
-        `;
+        </div>
+    `;
 
-                const optionsContainer = document.getElementById('options');
-                quest.options.forEach((option, index) => {
-                    const btn = document.createElement('div');
-                    btn.className = 'option';
-                    btn.textContent = option;
-                    btn.onclick = () => checkAnswer(index);
-                    optionsContainer.appendChild(btn);
-                });
-            } else if (quest.type === 'sort') {
-                selectedItems = {};
-                Object.keys(quest.bins).forEach(bin => selectedItems[bin] = []);
-
-                content.innerHTML = `
-            <div class="quest-card">
-                <span class="quest-type">🗂️ Сортировка</span>
-                <div class="question">${quest.question}</div>
-                <div class="items-container" id="itemsContainer"></div>
-                <div class="sorting-container" id="sortingContainer"></div>
-                <div class="feedback" id="feedback">
-                    <div class="feedback-title" id="feedbackTitle"></div>
-                    <div class="feedback-text" id="feedbackText"></div>
-                    <div class="eco-fact">💡 <strong>Факт:</strong> ${quest.fact}</div>
-                </div>
-            </div>
-        `;
-
-                const itemsContainer = document.getElementById('itemsContainer');
-                quest.items.forEach(item => {
-                    const itemEl = document.createElement('div');
-                    itemEl.className = 'item';
-                    itemEl.textContent = item;
-                    itemEl.dataset.item = item;
-                    itemEl.onclick = () => selectItem(item);
-                    itemsContainer.appendChild(itemEl);
-                });
-
-                const sortingContainer = document.getElementById('sortingContainer');
-                Object.keys(quest.bins).forEach(binName => {
-                    const bin = document.createElement('div');
-                    bin.className = 'bin';
-                    bin.dataset.bin = binName;
-                    bin.innerHTML = `
-                <div class="bin-title">${binName}</div>
-                <div class="bin-items" id="bin-${binName.replace(/\s/g, '-')}"></div>
-            `;
-                    bin.onclick = () => placeItem(binName);
-                    sortingContainer.appendChild(bin);
-                });
-            }
+            const optionsContainer = document.getElementById('options');
+            question.options.forEach((option, index) => {
+                const btn = document.createElement('div');
+                btn.className = 'option';
+                btn.textContent = option;
+                btn.onclick = () => checkAnswer(index);
+                optionsContainer.appendChild(btn);
+            });
         }
 
         function checkAnswer(selectedIndex) {
-            const quest = quests[currentQuestIndex];
+            const question = questions[currentQuestionIndex];
             const options = document.querySelectorAll('.option');
 
             options.forEach(opt => opt.classList.add('disabled'));
 
-            if (selectedIndex === quest.correct) {
+            if (selectedIndex === question.correct) {
                 options[selectedIndex].classList.add('correct');
-                totalScore += quest.points;
-                totalEcoPoints += quest.eco;
+
+                // Бонус за серию
+                currentStreak++;
+                maxStreak = Math.max(maxStreak, currentStreak);
+                const streakBonus = currentStreak > 1 ? (currentStreak - 1) * 10 : 0;
+
+                totalScore += question.points + streakBonus;
                 correctAnswers++;
                 vibrate('success');
 
+                const bonusText = streakBonus > 0 ? ` (бонус за серию +${streakBonus})` : '';
                 document.getElementById('feedbackTitle').textContent = '✅ Правильно!';
-                document.getElementById('feedbackText').textContent = `+${quest.points} очков, +${quest.eco} эко-баллов!`;
+                document.getElementById('feedbackText').textContent = `+${question.points}${bonusText} очков!`;
             } else {
                 options[selectedIndex].classList.add('wrong');
-                options[quest.correct].classList.add('correct');
+                options[question.correct].classList.add('correct');
+                currentStreak = 0;
                 vibrate('error');
 
                 document.getElementById('feedbackTitle').textContent = '❌ Неправильно';
-                document.getElementById('feedbackText').textContent = 'Правильный ответ: ' + quest.options[quest.correct];
+                document.getElementById('feedbackText').textContent = 'Правильный ответ: ' + question.options[question.correct];
             }
 
             document.getElementById('feedback').classList.add('active');
@@ -823,94 +890,11 @@
             }, 500);
         }
 
-        function selectItem(item) {
-            const items = document.querySelectorAll('.item');
-            items.forEach(el => {
-                if (el.dataset.item === item && !el.classList.contains('placed')) {
-                    el.style.opacity = el.style.opacity === '0.5' ? '1' : '0.5';
-                    selectedItem = el.style.opacity === '0.5' ? item : null;
-                } else if (!el.classList.contains('placed')) {
-                    el.style.opacity = '1';
-                }
-            });
-            vibrate('light');
-        }
+        function nextQuestion() {
+            currentQuestionIndex++;
 
-        function placeItem(binName) {
-            if (!selectedItem) return;
-
-            const quest = quests[currentQuestIndex];
-            selectedItems[binName].push(selectedItem);
-
-            const binEl = document.getElementById(`bin-${binName.replace(/\s/g, '-')}`);
-            const itemEl = document.createElement('div');
-            itemEl.textContent = selectedItem;
-            itemEl.style.fontSize = '12px';
-            itemEl.style.padding = '4px 8px';
-            itemEl.style.background = 'rgba(76, 175, 80, 0.3)';
-            itemEl.style.borderRadius = '8px';
-            itemEl.style.marginTop = '5px';
-            binEl.appendChild(itemEl);
-
-            document.querySelectorAll('.item').forEach(el => {
-                if (el.dataset.item === selectedItem) {
-                    el.classList.add('placed');
-                    el.style.opacity = '0.5';
-                }
-            });
-
-            selectedItem = null;
-            vibrate('light');
-
-            let totalPlaced = 0;
-            Object.values(selectedItems).forEach(items => totalPlaced += items.length);
-
-            if (totalPlaced === quest.items.length) {
-                setTimeout(() => checkSorting(), 500);
-            }
-        }
-
-        function checkSorting() {
-            const quest = quests[currentQuestIndex];
-            let correct = true;
-
-            for (const binName in quest.bins) {
-                const expected = quest.bins[binName].sort();
-                const actual = selectedItems[binName].sort();
-
-                if (JSON.stringify(expected) !== JSON.stringify(actual)) {
-                    correct = false;
-                    break;
-                }
-            }
-
-            if (correct) {
-                totalScore += quest.points;
-                totalEcoPoints += quest.eco;
-                correctAnswers++;
-                vibrate('success');
-
-                document.getElementById('feedbackTitle').textContent = '✅ Отлично!';
-                document.getElementById('feedbackText').textContent = `Всё правильно! +${quest.points} очков, +${quest.eco} эко-баллов!`;
-            } else {
-                vibrate('error');
-                document.getElementById('feedbackTitle').textContent = '❌ Не совсем верно';
-                document.getElementById('feedbackText').textContent = 'Попробуй ещё раз в следующий раз!';
-            }
-
-            document.getElementById('feedback').classList.add('active');
-            updateProgress();
-
-            setTimeout(() => {
-                document.getElementById('nextBtn').style.display = 'block';
-            }, 500);
-        }
-
-        function nextQuest() {
-            currentQuestIndex++;
-
-            if (currentQuestIndex < quests.length) {
-                loadQuest();
+            if (currentQuestionIndex < questions.length) {
+                loadQuestion();
             } else {
                 showResults();
             }
@@ -919,29 +903,34 @@
         function showResults() {
             showScreen('resultsScreen');
 
+            const percentage = Math.round((correctAnswers / questions.length) * 100);
+
             document.getElementById('finalScore').textContent = totalScore;
-            document.getElementById('finalEco').textContent = totalEcoPoints;
-            document.getElementById('finalCorrect').textContent = correctAnswers + '/' + quests.length;
+            document.getElementById('finalCorrect').textContent = correctAnswers + '/' + questions.length;
+            document.getElementById('finalPercent').textContent = percentage + '%';
 
             let icon, title, achievement;
-            const percentage = (correctAnswers / quests.length) * 100;
 
             if (percentage === 100) {
                 icon = '🏆';
-                title = 'Легенда экологии!';
-                achievement = '💎 Эко-гений - Ты спас планету!';
-            } else if (percentage >= 75) {
+                title = 'Легенда знаний!';
+                achievement = '💎 Абсолютный эксперт - Идеальный результат!';
+            } else if (percentage >= 80) {
                 icon = '🌟';
                 title = 'Отлично!';
-                achievement = '🥇 Эко-эксперт - Ты знаешь многое!';
-            } else if (percentage >= 50) {
+                achievement = '🥇 Знаток технологий - Превосходный результат!';
+            } else if (percentage >= 60) {
                 icon = '✨';
                 title = 'Хорошо!';
-                achievement = '🥈 Эко-защитник - Продолжай учиться!';
+                achievement = '🥈 Технический специалист - Хороший уровень!';
+            } else if (percentage >= 40) {
+                icon = '📚';
+                title = 'Неплохо!';
+                achievement = '🥉 Начинающий - Есть куда расти!';
             } else {
-                icon = '🌱';
-                title = 'Начало пути!';
-                achievement = '🥉 Эко-новичок - Ты на верном пути!';
+                icon = '💡';
+                title = 'Попробуй ещё!';
+                achievement = '🌱 Новичок - Узнал много нового!';
             }
 
             document.getElementById('resultsIcon').textContent = icon;
@@ -949,10 +938,11 @@
             document.getElementById('achievementText').textContent = achievement;
 
             const facts = [
-                '♻️ Переработка металлов сохраняет природные ресурсы',
-                '🌍 Москабельмет помогает создавать экологичное будущее',
-                '⚡ Оптоволоконные кабели передают данные на огромные расстояния',
-                '🏙️ Умные города работают благодаря правильной кабельной инфраструктуре'
+                `Вы узнали о ${questions.length} важных аспектах работы Москабельмет`,
+                `Максимальная серия правильных ответов: ${maxStreak}`,
+                'Москабельмет с 1895 года создаёт решения для цифровой инфраструктуры',
+                'Компания участвовала в строительстве Крымского моста',
+                'Оптоволоконные кабели передают данные со скоростью света'
             ];
 
             document.getElementById('learnedFacts').textContent = facts.join(' • ');
@@ -960,18 +950,19 @@
             vibrate('success');
         }
 
-        function restartQuest() {
-            startQuest();
+        function restartQuiz() {
+            startQuiz();
         }
 
-        function endQuest() {
+        function endQuiz() {
             if (isInTelegram && tg.sendData) {
                 tg.sendData(JSON.stringify({
                     score: totalScore,
-                    ecoPoints: totalEcoPoints,
                     correct: correctAnswers,
-                    total: quests.length,
-                    game: 'eco_quest'
+                    total: questions.length,
+                    percentage: Math.round((correctAnswers / questions.length) * 100),
+                    maxStreak: maxStreak,
+                    game: 'quiz'
                 }));
             } else {
                 showScreen('menuScreen');
