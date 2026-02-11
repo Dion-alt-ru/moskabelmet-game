@@ -38,15 +38,8 @@
     }
 
     @keyframes moveBackground {
-
-        0%,
-        100% {
-            transform: translate(0, 0);
-        }
-
-        50% {
-            transform: translate(-50px, -50px);
-        }
+        0%, 100% { transform: translate(0, 0); }
+        50% { transform: translate(-50px, -50px); }
     }
 
     #app {
@@ -57,7 +50,6 @@
         flex-direction: column;
     }
 
-    /* ========== ЭКРАНЫ ========== */
     .screen {
         display: none;
         padding: 20px;
@@ -66,36 +58,17 @@
         align-items: center;
     }
 
-    .screen.active {
-        display: flex;
-    }
+    .screen.active { display: flex; }
 
-    /* ========== МЕНЮ ========== */
-    .menu-container {
-        max-width: 450px;
-        width: 100%;
-    }
+    .menu-container { max-width: 450px; width: 100%; }
 
-    .logo-container {
-        text-align: center;
-        margin-bottom: 30px;
-    }
+    .logo-container { text-align: center; margin-bottom: 30px; }
 
-    .logo {
-        font-size: 80px;
-        animation: bounce 2s ease infinite;
-    }
+    .logo { font-size: 80px; animation: bounce 2s ease infinite; }
 
     @keyframes bounce {
-
-        0%,
-        100% {
-            transform: translateY(0) rotate(0deg);
-        }
-
-        50% {
-            transform: translateY(-15px) rotate(5deg);
-        }
+        0%, 100% { transform: translateY(0) rotate(0deg); }
+        50% { transform: translateY(-15px) rotate(5deg); }
     }
 
     h1 {
@@ -119,7 +92,6 @@
         font-weight: 600;
     }
 
-    /* ========== КАРТОЧКИ ========== */
     .card {
         background: rgba(255, 255, 255, 0.1);
         border-radius: 20px;
@@ -146,7 +118,6 @@
         color: rgba(255, 255, 255, 0.9);
     }
 
-    /* ========== СТАТИСТИКА ПРЕВЬЮ ========== */
     .stats-preview {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
@@ -163,25 +134,10 @@
         border: 1px solid rgba(255, 255, 255, 0.2);
     }
 
-    .stat-number {
-        font-size: 32px;
-        font-weight: 800;
-        color: #ffffff;
-        margin-bottom: 5px;
-    }
+    .stat-number { font-size: 32px; font-weight: 800; color: #ffffff; margin-bottom: 5px; }
+    .stat-text { font-size: 12px; color: rgba(255, 255, 255, 0.8); font-weight: 600; }
 
-    .stat-text {
-        font-size: 12px;
-        color: rgba(255, 255, 255, 0.8);
-        font-weight: 600;
-    }
-
-    /* ========== ТЕМЫ ========== */
-    .topics {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-    }
+    .topics { display: flex; flex-wrap: wrap; gap: 8px; }
 
     .topic-badge {
         background: rgba(255, 255, 255, 0.2);
@@ -193,7 +149,6 @@
         border: 1px solid rgba(255, 255, 255, 0.3);
     }
 
-    /* ========== СТАТИСТИКА ИГРЫ ========== */
     .stats-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
@@ -209,11 +164,7 @@
         border: 1px solid rgba(255, 255, 255, 0.2);
     }
 
-    .stat-value {
-        font-size: 28px;
-        font-weight: 800;
-        color: #ffffff;
-    }
+    .stat-value { font-size: 28px; font-weight: 800; color: #ffffff; }
 
     .stat-label {
         font-size: 11px;
@@ -223,7 +174,6 @@
         font-weight: 600;
     }
 
-    /* ========== КНОПКИ ========== */
     .btn {
         width: 100%;
         padding: 18px;
@@ -251,10 +201,7 @@
         transition: width 0.6s, height 0.6s;
     }
 
-    .btn:active::before {
-        width: 300px;
-        height: 300px;
-    }
+    .btn:active::before { width: 300px; height: 300px; }
 
     .btn-primary {
         background: rgba(255, 255, 255, 0.95);
@@ -262,9 +209,7 @@
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     }
 
-    .btn-primary:active {
-        transform: scale(0.98);
-    }
+    .btn-primary:active { transform: scale(0.98); }
 
     .btn-secondary {
         background: rgba(255, 255, 255, 0.15);
@@ -273,11 +218,7 @@
         margin-top: 12px;
     }
 
-    /* ========== ИГРА ========== */
-    .game-container {
-        max-width: 500px;
-        width: 100%;
-    }
+    .game-container { max-width: 500px; width: 100%; }
 
     .progress-bar {
         background: rgba(255, 255, 255, 0.2);
@@ -325,12 +266,7 @@
         color: #fff;
     }
 
-    /* ========== ОПЦИИ ========== */
-    .options {
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-    }
+    .options { display: flex; flex-direction: column; gap: 12px; }
 
     .option {
         background: rgba(255, 255, 255, 0.1);
@@ -345,32 +281,12 @@
         text-align: left;
     }
 
-    .option:active {
-        transform: scale(0.98);
-    }
+    .option:active { transform: scale(0.98); }
+    .option:hover { background: rgba(255, 255, 255, 0.15); border-color: rgba(255, 255, 255, 0.4); }
+    .option.correct { background: rgba(76, 175, 80, 0.3); border-color: #4CAF50; box-shadow: 0 0 20px rgba(76, 175, 80, 0.4); }
+    .option.wrong { background: rgba(244, 67, 54, 0.3); border-color: #f44336; }
+    .option.disabled { pointer-events: none; opacity: 0.6; }
 
-    .option:hover {
-        background: rgba(255, 255, 255, 0.15);
-        border-color: rgba(255, 255, 255, 0.4);
-    }
-
-    .option.correct {
-        background: rgba(76, 175, 80, 0.3);
-        border-color: #4CAF50;
-        box-shadow: 0 0 20px rgba(76, 175, 80, 0.4);
-    }
-
-    .option.wrong {
-        background: rgba(244, 67, 54, 0.3);
-        border-color: #f44336;
-    }
-
-    .option.disabled {
-        pointer-events: none;
-        opacity: 0.6;
-    }
-
-    /* ========== ОБРАТНАЯ СВЯЗЬ ========== */
     .feedback {
         background: rgba(255, 255, 255, 0.15);
         border-left: 4px solid #ffffff;
@@ -380,35 +296,16 @@
         display: none;
     }
 
-    .feedback.active {
-        display: block;
-        animation: slideIn 0.4s;
-    }
+    .feedback.active { display: block; animation: slideIn 0.4s; }
 
     @keyframes slideIn {
-        from {
-            opacity: 0;
-            transform: translateY(-10px);
-        }
-
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
     }
 
-    .feedback-title {
-        font-size: 18px;
-        font-weight: 700;
-        color: #ffffff;
-        margin-bottom: 10px;
-    }
+    .feedback-title { font-size: 18px; font-weight: 700; color: #ffffff; margin-bottom: 10px; }
 
-    .feedback-text {
-        font-size: 14px;
-        line-height: 1.6;
-        color: rgba(255, 255, 255, 0.9);
-    }
+    .feedback-text { font-size: 14px; line-height: 1.6; color: rgba(255, 255, 255, 0.9); }
 
     .fact {
         background: rgba(33, 150, 243, 0.2);
@@ -421,39 +318,17 @@
         color: rgba(255, 255, 255, 0.9);
     }
 
-    /* ========== РЕЗУЛЬТАТЫ ========== */
-    .results-container {
-        max-width: 450px;
-        width: 100%;
-        text-align: center;
-    }
+    .results-container { max-width: 450px; width: 100%; text-align: center; }
 
-    .results-icon {
-        font-size: 100px;
-        margin-bottom: 20px;
-        animation: bounceIn 0.6s;
-    }
+    .results-icon { font-size: 100px; margin-bottom: 20px; animation: bounceIn 0.6s; }
 
     @keyframes bounceIn {
-        0% {
-            transform: scale(0);
-        }
-
-        50% {
-            transform: scale(1.1);
-        }
-
-        100% {
-            transform: scale(1);
-        }
+        0% { transform: scale(0); }
+        50% { transform: scale(1.1); }
+        100% { transform: scale(1); }
     }
 
-    .results-title {
-        font-size: 36px;
-        font-weight: 800;
-        margin-bottom: 15px;
-        color: #ffffff;
-    }
+    .results-title { font-size: 36px; font-weight: 800; margin-bottom: 15px; color: #ffffff; }
 
     .achievement {
         background: rgba(255, 215, 0, 0.15);
@@ -463,16 +338,8 @@
         margin: 20px 0;
     }
 
-    .achievement-icon {
-        font-size: 50px;
-        margin-bottom: 10px;
-    }
-
-    .achievement-text {
-        font-size: 18px;
-        font-weight: 700;
-        color: #FFD700;
-    }
+    .achievement-icon { font-size: 50px; margin-bottom: 10px; }
+    .achievement-text { font-size: 18px; font-weight: 700; color: #FFD700; }
 </style>
 
 <body>
@@ -545,8 +412,7 @@
 
                 <div id="questionContent"></div>
 
-                <button class="btn btn-primary" id="nextBtn" style="display: none;" onclick="nextQuestion()">Следующий
-                    вопрос →</button>
+                <button class="btn btn-primary" id="nextBtn" style="display: none;" onclick="nextQuestion()">Следующий вопрос →</button>
             </div>
         </div>
 
@@ -591,390 +457,404 @@
 
     <script>
         // Инициализация Telegram WebApp
-let tg = null;
-let isInTelegram = false;
+        let tg = null;
+        let isInTelegram = false;
 
-try {
-    tg = window.Telegram.WebApp;
-    tg.ready();
-    tg.expand();
-    isInTelegram = true;
-    console.log('Telegram WebApp инициализирован');
-} catch (e) {
-    console.log('Запуск вне Telegram');
-    isInTelegram = false;
-}
-
-// Игровые переменные
-let currentQuestionIndex = 0;
-let totalScore = 0;
-let correctAnswers = 0;
-let currentStreak = 0;
-let maxStreak = 0;
-
-// Вопросы викторины
-const questions = [
-    {
-        question: 'В каком году была основана компания Москабельмет?',
-        options: ['1895', '1950', '2000', '2010'],
-        correct: 0,
-        fact: 'Москабельмет основан в 1895 году - это более 125 лет истории! За это время компания стала крупнейшим промышленно-технологическим холдингом.',
-        points: 100
-    },
-    {
-        question: 'Какой тип кабеля используется для передачи данных на большие расстояния?',
-        options: ['Медный кабель', 'Оптоволоконный кабель', 'Алюминиевый кабель', 'Стальной кабель'],
-        correct: 1,
-        fact: 'Оптоволоконный кабель передаёт данные со скоростью света! Москабельмет производит современные оптоволоконные кабели для телекоммуникаций.',
-        points: 100
-    },
-    {
-        question: 'Что такое СКС (Структурированная кабельная система)?',
-        options: [
-            'Система кондиционирования',
-            'Единая кабельная инфраструктура здания',
-            'Система пожарной безопасности',
-            'Система уборки'
-        ],
-        correct: 1,
-        fact: 'СКС - это "нервная система" современного здания, которая объединяет компьютеры, телефоны, камеры и другое оборудование. Москабельмет проектирует и внедряет такие системы "под ключ".',
-        points: 100
-    },
-    {
-        question: 'Для каких масштабных проектов Москабельмет поставлял кабельную продукцию?',
-        options: [
-            'Только для московских офисов',
-            'Для стадионов ЧМ-2018 и Крымского моста',
-            'Только для частных клиентов',
-            'Для зарубежных проектов'
-        ],
-        correct: 1,
-        fact: 'Компания участвовала в таких знаковых проектах, как стадионы чемпионата мира по футболу 2018 года и строительство Крымского моста!',
-        points: 100
-    },
-    {
-        question: 'Сколько наименований продукции выпускает ГК Москабельмет?',
-        options: [
-            'Около 10 000',
-            'Около 40 000',
-            'Около 80 000',
-            'Около 100 000'
-        ],
-        correct: 2,
-        fact: 'Москабельмет выпускает около 80 000 наименований кабельно-проводниковой продукции! Это один из самых широких ассортиментов в России.',
-        points: 100
-    },
-    {
-        question: 'Какой уникальный вид проводов освоил Москабельмет первым и единственным в России?',
-        options: [
-            'Оптоволоконные кабели',
-            'Транспонированные провода',
-            'Силовые кабели',
-            'Медные провода'
-        ],
-        correct: 1,
-        fact: 'Москабельмет стал единственным в России производителем высокотехнологичных транспонированных проводов. Это уникальная продукция для электротехники!',
-        points: 100
-    },
-    {
-        question: 'Какое место занимает ГК Москабельмет среди производителей кабельной продукции в России?',
-        options: [
-            'ТОП-10',
-            'ТОП-5',
-            'ТОП-3',
-            'ТОП-1'
-        ],
-        correct: 2,
-        fact: 'По аналитическим данным, ГК Москабельмет входит в ТОП-3 производителей кабельно-проводниковой продукции в России!',
-        points: 100
-    },
-    {
-        question: 'Сколько километров кабельной продукции ежегодно выпускает Москабельмет?',
-        options: [
-            'Около 10 000 км',
-            'Около 20 000 км',
-            'Около 40 000 км',
-            'Около 60 000 км'
-        ],
-        correct: 2,
-        fact: 'Москабельмет ежегодно выпускает не менее 40 000 км продукции - это равно длине окружности Земли!',
-        points: 100
-    },
-    {
-        question: 'Какие металлы принимает Москабельмет на переработку?',
-        options: [
-            'Только медь',
-            'Медь, алюминий, латунь и другие цветные металлы',
-            'Только чёрные металлы',
-            'Не занимается переработкой'
-        ],
-        correct: 1,
-        fact: 'Москабельмет принимает широкий спектр цветных металлов. Переработка вторсырья помогает экологии и экономит ресурсы.',
-        points: 100
-    },
-    {
-        question: 'Для каких отраслей работает Москабельмет?',
-        options: [
-            'Только для IT-компаний',
-            'Для телекома, энергетики, строительства, промышленности и госсектора',
-            'Только для частных лиц',
-            'Только для образовательных учреждений'
-        ],
-        correct: 1,
-        fact: 'Москабельмет - универсальный поставщик решений для самых разных отраслей: от телекоммуникаций до промышленных предприятий.',
-        points: 100
-    },
-    {
-        question: 'Что такое "умный город", в создании которого участвует компания?',
-        options: [
-            'Город с красивой архитектурой',
-            'Городская инфраструктура с датчиками, камерами и системами управления',
-            'Город с большим количеством университетов',
-            'Город с развитым транспортом'
-        ],
-        correct: 1,
-        fact: '"Умный город" - это сеть датчиков, камер и систем управления, которые делают жизнь удобнее: контролируют трафик, освещение, безопасность. Москабельмет создаёт кабельную инфраструктуру для таких проектов.',
-        points: 100
-    },
-    {
-        question: 'Какой тип кабеля используется для зарядки электромобилей?',
-        options: [
-            'Обычный бытовой кабель',
-            'Специальный силовой кабель повышенной мощности',
-            'Оптоволоконный кабель',
-            'Телефонный кабель'
-        ],
-        correct: 1,
-        fact: 'Для зарядных станций нужны специальные силовые кабели, выдерживающие большие токи. Москабельмет производит такую продукцию для развития электротранспорта.',
-        points: 100
-    },
-    {
-        question: 'Почему студентам и школьникам интересен Москабельмет?',
-        options: [
-            'Компания не работает с молодёжью',
-            'Предлагает стажировки, экскурсии и возможность узнать о современных технологиях',
-            'Только как место покупки кабеля',
-            'Только для развлечения'
-        ],
-        correct: 1,
-        fact: 'Москабельмет активно работает с молодёжью: проводит экскурсии на производство, предлагает стажировки и рассказывает о карьере в high-tech индустрии.',
-        points: 100
-    },
-    {
-        question: 'Какие услуги предоставляет Москабельмет для бизнеса?',
-        options: [
-            'Только продажу кабеля',
-            'Комплексное проектирование, монтаж и обслуживание IT-инфраструктуры',
-            'Только консультации',
-            'Только ремонт'
-        ],
-        correct: 1,
-        fact: 'Компания предлагает решения "под ключ": от проектирования сетей до их монтажа и технической поддержки. Это экономит время и деньги клиентов.',
-        points: 100
-    },
-    {
-        question: 'Москабельмет - это только завод или нечто большее?',
-        options: [
-            'Только кабельный завод',
-            'Производитель IT-оборудования',
-            'Холдинг с полным циклом: от сырья до готовых IT-решений',
-            'Торговая компания'
-        ],
-        correct: 2,
-        fact: 'Москабельмет - это промышленно-технологический холдинг, который занимается не только производством кабелей, но и созданием комплексных IT-инфраструктур для бизнеса и государства.',
-        points: 100
-    }
-];
-
-// Обновляем количество вопросов в меню
-document.getElementById('totalQuestions').textContent = questions.length;
-
-// ========== ФУНКЦИИ ==========
-
-function vibrate(type = 'light') {
-    if (isInTelegram && tg.HapticFeedback) {
-        if (type === 'success') {
-            tg.HapticFeedback.notificationOccurred('success');
-        } else if (type === 'error') {
-            tg.HapticFeedback.notificationOccurred('error');
-        } else {
-            tg.HapticFeedback.impactOccurred('light');
+        try {
+            tg = window.Telegram.WebApp;
+            tg.ready();
+            tg.expand();
+            isInTelegram = true;
+        } catch (e) {
+            isInTelegram = false;
         }
-    }
-}
 
-function showScreen(screenId) {
-    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-    document.getElementById(screenId).classList.add('active');
-}
+        // Игровые переменные
+        let currentQuestionIndex = 0;
+        let totalScore = 0;
+        let correctAnswers = 0;
+        let currentStreak = 0;
+        let maxStreak = 0;
+        let shuffledCorrectIndex = 0; // текущий правильный индекс после перемешивания
 
-function updateProgress() {
-    const progress = ((currentQuestionIndex) / questions.length) * 100;
-    document.getElementById('progressBar').style.width = progress + '%';
-    document.getElementById('currentQuestion').textContent = currentQuestionIndex + 1;
-    document.getElementById('score').textContent = totalScore;
-    document.getElementById('streak').textContent = currentStreak;
-}
+        // Вопросы викторины
+        const questions = [
+            {
+                question: 'В каком году была основана компания Москабельмет?',
+                options: ['1895', '1950', '2000', '2010'],
+                correct: 0,
+                fact: 'Москабельмет основан в 1895 году - это более 125 лет истории! За это время компания стала крупнейшим промышленно-технологическим холдингом.',
+                points: 100
+            },
+            {
+                question: 'Какой тип кабеля используется для передачи данных на большие расстояния?',
+                options: ['Медный кабель', 'Оптоволоконный кабель', 'Алюминиевый кабель', 'Стальной кабель'],
+                correct: 1,
+                fact: 'Оптоволоконный кабель передаёт данные со скоростью света! Москабельмет производит современные оптоволоконные кабели для телекоммуникаций.',
+                points: 100
+            },
+            {
+                question: 'Что такое СКС (Структурированная кабельная система)?',
+                options: [
+                    'Система кондиционирования',
+                    'Единая кабельная инфраструктура здания',
+                    'Система пожарной безопасности',
+                    'Система уборки'
+                ],
+                correct: 1,
+                fact: 'СКС - это "нервная система" современного здания, которая объединяет компьютеры, телефоны, камеры и другое оборудование. Москабельмет проектирует и внедряет такие системы "под ключ".',
+                points: 100
+            },
+            {
+                question: 'Для каких масштабных проектов Москабельмет поставлял кабельную продукцию?',
+                options: [
+                    'Только для московских офисов',
+                    'Для стадионов ЧМ-2018 и Крымского моста',
+                    'Только для частных клиентов',
+                    'Для зарубежных проектов'
+                ],
+                correct: 1,
+                fact: 'Компания участвовала в таких знаковых проектах, как стадионы чемпионата мира по футболу 2018 года и строительство Крымского моста!',
+                points: 100
+            },
+            {
+                question: 'Сколько наименований продукции выпускает ГК Москабельмет?',
+                options: [
+                    'Около 10 000',
+                    'Около 40 000',
+                    'Около 80 000',
+                    'Около 100 000'
+                ],
+                correct: 2,
+                fact: 'Москабельмет выпускает около 80 000 наименований кабельно-проводниковой продукции! Это один из самых широких ассортиментов в России.',
+                points: 100
+            },
+            {
+                question: 'Какой уникальный вид проводов освоил Москабельмет первым и единственным в России?',
+                options: [
+                    'Оптоволоконные кабели',
+                    'Транспонированные провода',
+                    'Силовые кабели',
+                    'Медные провода'
+                ],
+                correct: 1,
+                fact: 'Москабельмет стал единственным в России производителем высокотехнологичных транспонированных проводов. Это уникальная продукция для электротехники!',
+                points: 100
+            },
+            {
+                question: 'Какое место занимает ГК Москабельмет среди производителей кабельной продукции в России?',
+                options: [
+                    'ТОП-10',
+                    'ТОП-5',
+                    'ТОП-3',
+                    'ТОП-1'
+                ],
+                correct: 2,
+                fact: 'По аналитическим данным, ГК Москабельмет входит в ТОП-3 производителей кабельно-проводниковой продукции в России!',
+                points: 100
+            },
+            {
+                question: 'Сколько километров кабельной продукции ежегодно выпускает Москабельмет?',
+                options: [
+                    'Около 10 000 км',
+                    'Около 20 000 км',
+                    'Около 40 000 км',
+                    'Около 60 000 км'
+                ],
+                correct: 2,
+                fact: 'Москабельмет ежегодно выпускает не менее 40 000 км продукции - это равно длине окружности Земли!',
+                points: 100
+            },
+            {
+                question: 'Какие металлы принимает Москабельмет на переработку?',
+                options: [
+                    'Только медь',
+                    'Медь, алюминий, латунь и другие цветные металлы',
+                    'Только чёрные металлы',
+                    'Не занимается переработкой'
+                ],
+                correct: 1,
+                fact: 'Москабельмет принимает широкий спектр цветных металлов. Переработка вторсырья помогает экологии и экономит ресурсы.',
+                points: 100
+            },
+            {
+                question: 'Для каких отраслей работает Москабельмет?',
+                options: [
+                    'Только для IT-компаний',
+                    'Для телекома, энергетики, строительства, промышленности и госсектора',
+                    'Только для частных лиц',
+                    'Только для образовательных учреждений'
+                ],
+                correct: 1,
+                fact: 'Москабельмет - универсальный поставщик решений для самых разных отраслей: от телекоммуникаций до промышленных предприятий.',
+                points: 100
+            },
+            {
+                question: 'Что такое "умный город", в создании которого участвует компания?',
+                options: [
+                    'Город с красивой архитектурой',
+                    'Городская инфраструктура с датчиками, камерами и системами управления',
+                    'Город с большим количеством университетов',
+                    'Город с развитым транспортом'
+                ],
+                correct: 1,
+                fact: '"Умный город" - это сеть датчиков, камер и систем управления, которые делают жизнь удобнее: контролируют трафик, освещение, безопасность. Москабельмет создаёт кабельную инфраструктуру для таких проектов.',
+                points: 100
+            },
+            {
+                question: 'Какой тип кабеля используется для зарядки электромобилей?',
+                options: [
+                    'Обычный бытовой кабель',
+                    'Специальный силовой кабель повышенной мощности',
+                    'Оптоволоконный кабель',
+                    'Телефонный кабель'
+                ],
+                correct: 1,
+                fact: 'Для зарядных станций нужны специальные силовые кабели, выдерживающие большие токи. Москабельмет производит такую продукцию для развития электротранспорта.',
+                points: 100
+            },
+            {
+                question: 'Почему студентам и школьникам интересен Москабельмет?',
+                options: [
+                    'Компания не работает с молодёжью',
+                    'Предлагает стажировки, экскурсии и возможность узнать о современных технологиях',
+                    'Только как место покупки кабеля',
+                    'Только для развлечения'
+                ],
+                correct: 1,
+                fact: 'Москабельмет активно работает с молодёжью: проводит экскурсии на производство, предлагает стажировки и рассказывает о карьере в high-tech индустрии.',
+                points: 100
+            },
+            {
+                question: 'Какие услуги предоставляет Москабельмет для бизнеса?',
+                options: [
+                    'Только продажу кабеля',
+                    'Комплексное проектирование, монтаж и обслуживание IT-инфраструктуры',
+                    'Только консультации',
+                    'Только ремонт'
+                ],
+                correct: 1,
+                fact: 'Компания предлагает решения "под ключ": от проектирования сетей до их монтажа и технической поддержки. Это экономит время и деньги клиентов.',
+                points: 100
+            },
+            {
+                question: 'Москабельмет - это только завод или нечто большее?',
+                options: [
+                    'Только кабельный завод',
+                    'Производитель IT-оборудования',
+                    'Холдинг с полным циклом: от сырья до готовых IT-решений',
+                    'Торговая компания'
+                ],
+                correct: 2,
+                fact: 'Москабельмет - это промышленно-технологический холдинг, который занимается не только производством кабелей, но и созданием комплексных IT-инфраструктур для бизнеса и государства.',
+                points: 100
+            }
+        ];
 
-function startQuiz() {
-    currentQuestionIndex = 0;
-    totalScore = 0;
-    correctAnswers = 0;
-    currentStreak = 0;
-    maxStreak = 0;
-    showScreen('gameScreen');
-    loadQuestion();
-    vibrate('light');
-}
+        document.getElementById('totalQuestions').textContent = questions.length;
 
-function loadQuestion() {
-    const question = questions[currentQuestionIndex];
-    const content = document.getElementById('questionContent');
-    document.getElementById('nextBtn').style.display = 'none';
+        // ========== ПЕРЕМЕШИВАНИЕ ========== 
 
-    updateProgress();
+        function shuffleOptions(question) {
+            // Запоминаем правильный ответ по тексту
+            const correctText = question.options[question.correct];
 
-    content.innerHTML = `
-        <div class="question-card">
-            <span class="question-number">Вопрос ${currentQuestionIndex + 1} из ${questions.length}</span>
-            <div class="question">${question.question}</div>
-            <div class="options" id="options"></div>
-            <div class="feedback" id="feedback">
-                <div class="feedback-title" id="feedbackTitle"></div>
-                <div class="feedback-text" id="feedbackText"></div>
-                <div class="fact">💡 <strong>Факт:</strong> ${question.fact}</div>
-            </div>
-        </div>
-    `;
+            // Создаём массив индексов и перемешиваем (Fisher-Yates)
+            const indices = question.options.map((_, i) => i);
+            for (let i = indices.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [indices[i], indices[j]] = [indices[j], indices[i]];
+            }
 
-    const optionsContainer = document.getElementById('options');
-    question.options.forEach((option, index) => {
-        const btn = document.createElement('div');
-        btn.className = 'option';
-        btn.textContent = option;
-        btn.onclick = () => checkAnswer(index);
-        optionsContainer.appendChild(btn);
-    });
-}
+            // Формируем перемешанные варианты
+            const shuffled = indices.map(i => question.options[i]);
 
-function checkAnswer(selectedIndex) {
-    const question = questions[currentQuestionIndex];
-    const options = document.querySelectorAll('.option');
-    
-    options.forEach(opt => opt.classList.add('disabled'));
-    
-    if (selectedIndex === question.correct) {
-        options[selectedIndex].classList.add('correct');
-        
-        // Бонус за серию
-        currentStreak++;
-        maxStreak = Math.max(maxStreak, currentStreak);
-        const streakBonus = currentStreak > 1 ? (currentStreak - 1) * 10 : 0;
-        
-        totalScore += question.points + streakBonus;
-        correctAnswers++;
-        vibrate('success');
-        
-        const bonusText = streakBonus > 0 ? ` (бонус за серию +${streakBonus})` : '';
-        document.getElementById('feedbackTitle').textContent = '✅ Правильно!';
-        document.getElementById('feedbackText').textContent = `+${question.points}${bonusText} очков!`;
-    } else {
-        options[selectedIndex].classList.add('wrong');
-        options[question.correct].classList.add('correct');
-        currentStreak = 0;
-        vibrate('error');
-        
-        document.getElementById('feedbackTitle').textContent = '❌ Неправильно';
-        document.getElementById('feedbackText').textContent = 'Правильный ответ: ' + question.options[question.correct];
-    }
-    
-    document.getElementById('feedback').classList.add('active');
-    updateProgress();
-    
-    setTimeout(() => {
-        document.getElementById('nextBtn').style.display = 'block';
-    }, 500);
-}
+            // Находим новый индекс правильного ответа
+            shuffledCorrectIndex = shuffled.indexOf(correctText);
 
-function nextQuestion() {
-    currentQuestionIndex++;
-    
-    if (currentQuestionIndex < questions.length) {
-        loadQuestion();
-    } else {
-        showResults();
-    }
-}
+            return shuffled;
+        }
 
-function showResults() {
-    showScreen('resultsScreen');
-    
-    const percentage = Math.round((correctAnswers / questions.length) * 100);
-    
-    document.getElementById('finalScore').textContent = totalScore;
-    document.getElementById('finalCorrect').textContent = correctAnswers + '/' + questions.length;
-    document.getElementById('finalPercent').textContent = percentage + '%';
+        // ========== ФУНКЦИИ ==========
 
-    let icon, title, achievement;
+        function vibrate(type = 'light') {
+            if (isInTelegram && tg.HapticFeedback) {
+                if (type === 'success') {
+                    tg.HapticFeedback.notificationOccurred('success');
+                } else if (type === 'error') {
+                    tg.HapticFeedback.notificationOccurred('error');
+                } else {
+                    tg.HapticFeedback.impactOccurred('light');
+                }
+            }
+        }
 
-    if (percentage === 100) {
-        icon = '🏆';
-        title = 'Легенда знаний!';
-        achievement = '💎 Абсолютный эксперт - Идеальный результат!';
-    } else if (percentage >= 80) {
-        icon = '🌟';
-        title = 'Отлично!';
-        achievement = '🥇 Знаток технологий - Превосходный результат!';
-    } else if (percentage >= 60) {
-        icon = '✨';
-        title = 'Хорошо!';
-        achievement = '🥈 Технический специалист - Хороший уровень!';
-    } else if (percentage >= 40) {
-        icon = '📚';
-        title = 'Неплохо!';
-        achievement = '🥉 Начинающий - Есть куда расти!';
-    } else {
-        icon = '💡';
-        title = 'Попробуй ещё!';
-        achievement = '🌱 Новичок - Узнал много нового!';
-    }
+        function showScreen(screenId) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById(screenId).classList.add('active');
+        }
 
-    document.getElementById('resultsIcon').textContent = icon;
-    document.getElementById('resultsTitle').textContent = title;
-    document.getElementById('achievementText').textContent = achievement;
+        function updateProgress() {
+            const progress = ((currentQuestionIndex) / questions.length) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+            document.getElementById('currentQuestion').textContent = currentQuestionIndex + 1;
+            document.getElementById('score').textContent = totalScore;
+            document.getElementById('streak').textContent = currentStreak;
+        }
 
-    const facts = [
-        `Вы узнали о ${questions.length} важных аспектах работы Москабельмет`,
-        `Максимальная серия правильных ответов: ${maxStreak}`,
-        'Москабельмет с 1895 года создаёт решения для цифровой инфраструктуры',
-        'Компания участвовала в строительстве Крымского моста',
-        'Оптоволоконные кабели передают данные со скоростью света'
-    ];
+        function startQuiz() {
+            currentQuestionIndex = 0;
+            totalScore = 0;
+            correctAnswers = 0;
+            currentStreak = 0;
+            maxStreak = 0;
+            showScreen('gameScreen');
+            loadQuestion();
+            vibrate('light');
+        }
 
-    document.getElementById('learnedFacts').textContent = facts.join(' • ');
+        function loadQuestion() {
+            const question = questions[currentQuestionIndex];
+            const content = document.getElementById('questionContent');
+            document.getElementById('nextBtn').style.display = 'none';
 
-    vibrate('success');
-}
+            updateProgress();
 
-function restartQuiz() {
-    startQuiz();
-}
+            // Перемешиваем варианты ответов
+            const shuffledOptions = shuffleOptions(question);
 
-function endQuiz() {
-    if (isInTelegram && tg.sendData) {
-        tg.sendData(JSON.stringify({
-            score: totalScore,
-            correct: correctAnswers,
-            total: questions.length,
-            percentage: Math.round((correctAnswers / questions.length) * 100),
-            maxStreak: maxStreak,
-            game: 'quiz'
-        }));
-    } else {
-        showScreen('menuScreen');
-    }
-    vibrate('light');
-}
+            content.innerHTML = `
+                <div class="question-card">
+                    <span class="question-number">Вопрос ${currentQuestionIndex + 1} из ${questions.length}</span>
+                    <div class="question">${question.question}</div>
+                    <div class="options" id="options"></div>
+                    <div class="feedback" id="feedback">
+                        <div class="feedback-title" id="feedbackTitle"></div>
+                        <div class="feedback-text" id="feedbackText"></div>
+                        <div class="fact">💡 <strong>Факт:</strong> ${question.fact}</div>
+                    </div>
+                </div>
+            `;
+
+            const optionsContainer = document.getElementById('options');
+            shuffledOptions.forEach((option, index) => {
+                const btn = document.createElement('div');
+                btn.className = 'option';
+                btn.textContent = option;
+                btn.onclick = () => checkAnswer(index);
+                optionsContainer.appendChild(btn);
+            });
+        }
+
+        function checkAnswer(selectedIndex) {
+            const question = questions[currentQuestionIndex];
+            const options = document.querySelectorAll('.option');
+
+            options.forEach(opt => opt.classList.add('disabled'));
+
+            if (selectedIndex === shuffledCorrectIndex) {
+                options[selectedIndex].classList.add('correct');
+
+                currentStreak++;
+                maxStreak = Math.max(maxStreak, currentStreak);
+                const streakBonus = currentStreak > 1 ? (currentStreak - 1) * 10 : 0;
+
+                totalScore += question.points + streakBonus;
+                correctAnswers++;
+                vibrate('success');
+
+                const bonusText = streakBonus > 0 ? ` (бонус за серию +${streakBonus})` : '';
+                document.getElementById('feedbackTitle').textContent = '✅ Правильно!';
+                document.getElementById('feedbackText').textContent = `+${question.points}${bonusText} очков!`;
+            } else {
+                options[selectedIndex].classList.add('wrong');
+                options[shuffledCorrectIndex].classList.add('correct');
+                currentStreak = 0;
+                vibrate('error');
+
+                document.getElementById('feedbackTitle').textContent = '❌ Неправильно';
+                document.getElementById('feedbackText').textContent = 'Правильный ответ: ' + question.options[question.correct];
+            }
+
+            document.getElementById('feedback').classList.add('active');
+            updateProgress();
+
+            setTimeout(() => {
+                document.getElementById('nextBtn').style.display = 'block';
+            }, 500);
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+
+            if (currentQuestionIndex < questions.length) {
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            showScreen('resultsScreen');
+
+            const percentage = Math.round((correctAnswers / questions.length) * 100);
+
+            document.getElementById('finalScore').textContent = totalScore;
+            document.getElementById('finalCorrect').textContent = correctAnswers + '/' + questions.length;
+            document.getElementById('finalPercent').textContent = percentage + '%';
+
+            let icon, title, achievement;
+
+            if (percentage === 100) {
+                icon = '🏆'; title = 'Легенда знаний!';
+                achievement = '💎 Абсолютный эксперт - Идеальный результат!';
+            } else if (percentage >= 80) {
+                icon = '🌟'; title = 'Отлично!';
+                achievement = '🥇 Знаток технологий - Превосходный результат!';
+            } else if (percentage >= 60) {
+                icon = '✨'; title = 'Хорошо!';
+                achievement = '🥈 Технический специалист - Хороший уровень!';
+            } else if (percentage >= 40) {
+                icon = '📚'; title = 'Неплохо!';
+                achievement = '🥉 Начинающий - Есть куда расти!';
+            } else {
+                icon = '💡'; title = 'Попробуй ещё!';
+                achievement = '🌱 Новичок - Узнал много нового!';
+            }
+
+            document.getElementById('resultsIcon').textContent = icon;
+            document.getElementById('resultsTitle').textContent = title;
+            document.getElementById('achievementText').textContent = achievement;
+
+            const facts = [
+                `Вы узнали о ${questions.length} важных аспектах работы Москабельмет`,
+                `Максимальная серия правильных ответов: ${maxStreak}`,
+                'Москабельмет с 1895 года создаёт решения для цифровой инфраструктуры',
+                'Компания участвовала в строительстве Крымского моста',
+                'Оптоволоконные кабели передают данные со скоростью света'
+            ];
+
+            document.getElementById('learnedFacts').textContent = facts.join(' • ');
+            vibrate('success');
+        }
+
+        function restartQuiz() { startQuiz(); }
+
+        function endQuiz() {
+            if (isInTelegram && tg.sendData) {
+                tg.sendData(JSON.stringify({
+                    score: totalScore,
+                    correct: correctAnswers,
+                    total: questions.length,
+                    percentage: Math.round((correctAnswers / questions.length) * 100),
+                    maxStreak: maxStreak,
+                    game: 'quiz'
+                }));
+            } else {
+                showScreen('menuScreen');
+            }
+            vibrate('light');
+        }
     </script>
 </body>
 
